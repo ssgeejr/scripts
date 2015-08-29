@@ -1,0 +1,10 @@
+find ./  \
+-not -name "*.xml"  \
+-not -name "*.sh" \
+-not -name "*.conf" \
+-not -name Dockerfile \
+-not -name "*.md" \
+-not -name "*.repo" \
+-not -name "*.sql" \
+-not -name "*.db" \
+-print | sort -d
