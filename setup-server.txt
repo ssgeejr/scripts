@@ -3,3 +3,7 @@ Pull Maven: wget ftp://mirror.reverse.net/pub/apache/maven/maven-3/3.3.3/binarie
 
 https://github.com/docker/docker/releases
 Docker: wget https://get.docker.com/builds/Linux/x86_64/docker-1.8.2.tgz
+
+
+Backup Jenkins
+tar -czvf /opt/jenkins.bkup.tgz --exclude-tag-all=.exclude-tar ./*
