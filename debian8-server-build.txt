@@ -31,7 +31,7 @@ Host *
 EOF
 
 cat << EOF >> /home/devops/.ssh/authorized_keys
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEeBtmgk0tDIsBBsOQTuXWKs4Ra0jwTlOnyYv7LZFH95gA8QPeXyCMsCYN+rYg9EIEHYL8ppfo2cRmMA74TbqYrtKgrzZcFxbRbuDMGoazjFPZva5YXoRr+JJQ5FUhfvSi91qDaNc+Ou5fFihUFM/DxiWsihVkecJ2UGD3gB2jnrjfZ7ot4zLfptQUn/NZUkE0bSR1PTXOWGNsGZ1coN7CknJbRfbiZKA+Xl97gKpFuwLpJx74qi6mk+e4+Tp89Mys1H8SpPiIQZjWQ6hmgaa564pFZf/ICzIUqz5UzAKG4uZcl5megxFSmPIC5iTZCPoAjdFi+ohMabd4Fom6UDwB tekcomms-devops
+{YOUR_PUBLIC_KEY}
 EOF
 chown -R devops.devops /home/devops/.ssh
 chmod 600 /home/devops/.ssh/*
