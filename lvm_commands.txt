@@ -1,0 +1,13 @@
+apt-get install lvm2
+/etc/init.d/lvm start
+#not needed, but good to know
+#utility for graphically configuring Logical Volumes.
+#apt-get install system-config-lvm
+
+pvcreate /dev/sdb 
+vgcreate dockervg /dev/sdb
+lvcreate --name datalv1 -l 100%FREE dockervg
+mkfs.ext4 /dev/dockervg/datalv1
+mkdir /var/lib/docker
+mount /dev/dockervg/datalv1 /var/lib/docker
+echo "/dev/dockervg/datalv1 /var/lib/docker ext4 defaults 0 0" >> /etc/fstab
