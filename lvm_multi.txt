@@ -1,0 +1,50 @@
+Scott Hallett actually authored this bad-boy! 
+Install LVM:
+ 
+	apt-get install lvm2
+ 
+Create physical volumes:
+ 
+	pvcreate /dev/xvdi /dev/xvdj /dev/xvdk 
+
+Verify:
+ 
+	pvscan
+	pvdisplay 
+ 
+Create a Volume Group:
+ 
+	vgcreate vg1 /dev/xvdi /dev/xvdj /dev/xvdk
+ 
+Verify all is good:
+ 
+	vgdisplay
+	vgdisplay -s
+	vgscan
+ 
+Create the Logical Volume:
+ 
+		lvcreate --name lv1 --size 3TB vg1
+ 
+    or: (using all extents)
+
+		lvcreate --name lv1 -l 100%FREE vg1
+ 
+Verify:
+
+	lvdisplay -C
+ 
+Format:
+ 
+	mkfs.ext4 /dev/vg1/lv1
+ 
+Mount to /mnt3
+ 
+	mkdir /mnt3
+	mount /dev/vg1/lv1 /mnt3
+ 
+Optional:
+
+Add to the /etc/fstab:
+ 
+	/dev/vg1/lv1 /mnt3 ext4 defaults 0 0
