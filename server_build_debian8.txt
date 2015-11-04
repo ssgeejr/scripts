@@ -1,0 +1,29 @@
+# install/enable SSH and SUDO
+apt-get install -y sudo openssh-server
+service ssh start
+apt-get install -y wget curl elink lynx htop
+
+# ADD AND CONFIGURE THE DEVOPS USER
+
+adduser devops
+mkdir /home/devops/.ssh
+
+# Create the ssh config file 
+
+cat << EOF > /home/devops/.ssh/config
+Host *
+   StrictHostKeyChecking no
+EOF
+
+# Add the tekcomms-devops.pub key
+
+cat << EOF > /home/devops/.ssh/authorized_keys
+<<YOUR_PUB_SSH_KEY>>
+EOF
+
+echo "%devops ALL=(ALL) NOPASSWD: LOG_INPUT: ALL"  > /etc/sudoers.d/scm-devops
+chown -R devops:devops /home/devops/.ssh
+chmod 600 /home/devops/.ssh/*
+chmod 700 /home/devops/.ssh
+chmod 600 /root/.ssh/*
+chmod 700 /root/.ssh
