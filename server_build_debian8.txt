@@ -27,3 +27,14 @@ chmod 600 /home/devops/.ssh/*
 chmod 700 /home/devops/.ssh
 chmod 600 /root/.ssh/*
 chmod 700 /root/.ssh
+
+
+# disable password authentication
+# --WARNING-- ONLY DO THIS AFTER YOU VERIFY YOUR KEY WORKS
+# vi /etc/ssh/sshd_config
+# #In this file, set the following settings to the following values. If these settings are already in the file, set them to "no" rather than add new lines.
+# ChallengeResponseAuthentication no
+# PasswordAuthentication no
+# UsePAM no
+# #Once this is done, restart the SSH daemon to apply the settings.
+# /etc/init.d/sshd restart
