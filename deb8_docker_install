@@ -1,0 +1,34 @@
+# #If you have an install of Docker already installed, this will remove it 
+# apt-get purge lxc-docker*
+# apt-get purge docker.io*
+
+apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+echo "deb https://apt.dockerproject.org/repo debian-jessie main" >> /etc/apt/sources.list
+apt-get update
+#Verify that apt is pulling from the right repository.
+apt-cache policy docker-engine
+apt-get install docker-engine
+service docker start
+ 
+# #whatever user you want to run this as - should, not use root (security reasons)
+useradd -m -s /bin/bash -G docker devops
+# #you will need to log out and log back in to reset your security policy 
+
+
+# #------- TEST IT OUT -------#
+docker run -ti centos /bin/bash
+
+
+# --- You should see something like this .... 
+Unable to find image 'centos:latest' locally
+latest: Pulling from library/centos
+fa5be2806d4c: Pull complete 
+0cd86ce0a197: Extracting [================================>                  ] 40.67 MB/62.91 MB
+e9407f1d4b65: Download complete 
+c9853740aa05: Download complete 
+e9fa5d3a0d0e: Download complete 
+
+
+# --- finally it will start ... cat the version of redhat you are running ... 
+[root@110f79d05800 /]# cat /etc/redhat-release 
+CentOS Linux release 7.1.1503 (Core) 
