@@ -5,6 +5,7 @@ apt-get install lvm2
 *#not needed, utility for graphically configuring Logical Volumes*
 *apt-get install system-config-lvm*
 
+
 ```
 pvcreate /dev/sdb 
 vgcreate dockervg /dev/sdb
