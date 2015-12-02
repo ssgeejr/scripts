@@ -3,9 +3,9 @@
 The crontab is a formatted list of commands that you want to run on a regular schedule. crontab stands for "cron table," because it uses the job scheduler cron to execute tasks; cron itself is named after "chronos," the Greek word for time.
 
 These are not all of the commands, but the ones you should know [for a list of all the commands google 'man crontab']
-`crontab -e`	Edit your crontab file, or create one if it doesn't already exist [this is the command to open the editor^1]
-`crontab -l`	Display your crontab file.
-`crontab -v`	Display the last time you edited your crontab file. (This option is available on only a few systems.)
+ * `crontab -e`	Edit your crontab file, or create one if it doesn't already exist [this is the command to open the editor^1]
+ * `crontab -l`	Display your crontab file.
+ * `crontab -v`	Display the last time you edited your crontab file. (This option is available on only a few systems.)
 
 
 ```
