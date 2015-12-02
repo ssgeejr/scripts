@@ -1,6 +1,9 @@
 apt-get install lvm2
+
 /etc/init.d/lvm start
+
 *#not needed, utility for graphically configuring Logical Volumes*
+
 *apt-get install system-config-lvm*
 
 ```
