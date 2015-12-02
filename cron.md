@@ -27,20 +27,33 @@ Example
 Understanding the time configuration:
 
 On the minute: `0` 
+
 On the hour: `4 am`
+
 `Every day`
+
 `Every month`
+
 on day: `Sunday`
 
 Execute this command: `python /opt/bin/cleanupOldRepoObjects.py`
+
 Append to the log file:  `>> `
+
 If you wanted to overwrite the log file every time you would use: `>`
+
 write to the log file: `/var/log/awsArtifactoryScrubber.log`
+
 [Very important to learn this at some point in your devops career]
+
 Send err stream to the output locatino of stdout
-What? 
-err stream:  `2`
+
+*What?* 
+
+send the err stream:  `2`
+
 Redirect it away from the console: `>`
+
 To the same target as stdout [1]: `&1` 
 
 
