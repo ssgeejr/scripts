@@ -37,15 +37,10 @@ On the hour: `4 am`
 on day: `Sunday`
 
 Execute this command: `python /opt/bin/cleanupOldRepoObjects.py`
-
 Append to the log file:  `>> `
-
 If you wanted to overwrite the log file every time you would use: `>`
-
 write to the log file: `/var/log/awsArtifactoryScrubber.log`
-
 [Very important to learn this at some point in your devops career]
-
 Send err stream to the output locatino of stdout
 
 *What?* 
