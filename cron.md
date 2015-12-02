@@ -38,7 +38,7 @@ Understanding the time configuration:
  * [Very important to learn this at some point in your devops career]
  * Send err stream to the output locatino of stdout
 
-*What?* 
+**What?**
  * send the err stream:  `2`
  * Redirect it away from the console: `>`
  * To the same target as stdout [1]: `&1` 
