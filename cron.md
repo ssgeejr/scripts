@@ -8,7 +8,7 @@ crontab -l	Display your crontab file.
 crontab -v	Display the last time you edited your crontab file. (This option is available on only a few systems.)
 
 
-
+```
 +------------- min (0 - 59)
 | +----------- hour (0 - 23)
 | | +--------- day of        month (1 - 31)
@@ -17,13 +17,12 @@ crontab -v	Display the last time you edited your crontab file. (This option is a
 | | | | |
 - - - - -
 * * * * *   command to be executed
-
+```
 Cron helpful tips:
 Example
 0 4 * * 0  python /opt/bin/cleanupOldRepoObjects.py >> /var/log/awsArtifactoryScrubber.log 2>&1
 
-The time
-
+Understanding the time configuration:
 On the minute: 0 
 On the hour: 4 am
 Every day
