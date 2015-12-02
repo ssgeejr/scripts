@@ -1,8 +1,7 @@
 apt-get install lvm2
 /etc/init.d/lvm start
-#not needed, but good to know
-#utility for graphically configuring Logical Volumes.
-#apt-get install system-config-lvm
+*#not needed, utility for graphically configuring Logical Volumes*
+*apt-get install system-config-lvm*
 
 pvcreate /dev/sdb 
 vgcreate dockervg /dev/sdb
