@@ -78,6 +78,14 @@ apt-get install -y build-essential linux-headers-$(uname -r)
                        'Docker 1.8' : 'https://get.docker.com/builds/Linux/x86_64/docker-1.8.1',
                        'Docker Latest' : 'https://get.docker.com'  
 
+# from docker's site regarding 1.9
+# # To install, run the following command as root:
+# curl -sSL -O https://get.docker.com/builds/Linux/x86_64/docker-1.9.1 && chmod +x docker-1.9.1 && sudo mv docker-1.9.1 /usr/local/bin/docker
+# # Then start docker in daemon mode:
+# sudo /usr/local/bin/docker daemon
+
+
+
 #For this example, we will use 1.8.1 as the example					   
 docker --version
 ..... 1.8.1
