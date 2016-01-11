@@ -1,0 +1,33 @@
+#!/bin/bash
+
+apt-get update && apt-get install -y curl
+
+PUBLIC_IP=`/usr/bin/curl -s http://169.254.169.254/latest/meta-data/public-ipv4`
+PRIVATE_IP=`/usr/bin/curl -s http://169.254.169.254/latest/meta-data/local-ipv4`
+echo "$PRIVATE_IP  REPLACE_ME_WITH_SERVER_NAME.localdomain" >> /etc/hosts
+echo "$PUBLIC_IP   REPLACE_ME_WITH_SERVER_NAME" >> /etc/hosts
+
+echo 'REPLACE_ME_WITH_SERVER_NAME' > /etc/hostname
+hostname REPLACE_ME_WITH_SERVER_NAME
+/etc/init.d/hostname.sh start
+hostnamectl set-hostname REPLACE_ME_WITH_SERVER_NAME
+
+useradd -m -s /bin/bash devops
+
+
+mkdir /home/devops/.ssh
+
+cat << EOF > /home/devops/.ssh/config
+Host *
+   StrictHostKeyChecking no
+EOF
+
+cat << EOF >> /home/devops/.ssh/authorized_keys
+${REPLACE_ME_WITH_YOUR_PUBLIC_KEY}
+EOF
+
+chown -R devops.devops /home/devops/.ssh
+chmod 600 /home/devops/.ssh/*
+chmod 700 /home/devops/.ssh
+
+echo "%devops ALL=(ALL) NOPASSWD: LOG_INPUT: ALL"  > /etc/sudoers.d/devops
