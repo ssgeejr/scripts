@@ -1,0 +1,40 @@
+<!--
+file: artifactory.conf
+openssl genrsa -out ca.key 2048 
+openssl req -new -key ca.key -out ca.csr
+openssl x509 -req -days 365 -in ca.csr -signkey ca.key -out ca.crt
+cp ca.crt /etc/pki/tls/certs
+cp ca.key /etc/pki/tls/private/ca.key
+cp ca.csr /etc/pki/tls/private/ca.csr
+-->
+
+<VirtualHost *:80>
+        ServerAdmin admin@mail.com
+        ServerName server.com
+        ProxyRequests Off
+        <Proxy *>
+                Order deny,allow
+                Allow from all
+        </Proxy>
+        ProxyPreserveHost on
+        ProxyPass /artifactory http://localhost:8081/artifactory nocanon
+        ProxyPassReverse /artifactory http://localhost:8081/artifactory nocanon
+
+        AllowEncodedSlashes off
+</VirtualHost>
+
+<VirtualHost *:443>
+        SSLEngine on
+        ServerName server.com
+        SSLCertificateFile /etc/pki/tls/certs/ca.crt
+        SSLCertificateKeyFile /etc/pki/tls/private/ca.key
+         <Proxy *>
+                Order deny,allow
+                Allow from all
+        </Proxy>
+        ProxyPreserveHost on
+        ProxyPass /artifactory http://localhost:8081/artifactory nocanon
+        ProxyPassReverse /artifactory http://localhost:8081/artifactory nocanon
+
+        AllowEncodedSlashes off
+</VirtualHost>
