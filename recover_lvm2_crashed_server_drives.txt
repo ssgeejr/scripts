@@ -1,0 +1,126 @@
+
+Block Device /dev/sdb
+EBS ID vol-5111c7b0
+
+Block Device /dev/sdf
+EBS ID vol-d9e58638
+
+Block Device /dev/sdi
+EBS ID vol-a8ee4c48
+
+Block Device /dev/sdg
+EBS ID vol-d8e64b38
+
+Block Device /dev/sdh
+EBS ID vol-f3fb3410
+
+[root@ip-172-31-7-205 ~]# pvscan
+  WARNING: Device for PV 1CBCdb-fbtR-9tSJ-Ietx-9e0N-FhXQ-4yox86 not found or rejected by a filter.
+  WARNING: Device for PV Zdx4cj-zQMQ-oJmL-gePD-Nq0c-XSiZ-9EiwiZ not found or rejected by a filter.
+  WARNING: Device for PV IcKF91-oFAC-pFqq-F5mH-8fWk-FBjf-dmu5zI not found or rejected by a filter.
+  WARNING: Device for PV 1CBCdb-fbtR-9tSJ-Ietx-9e0N-FhXQ-4yox86 not found or rejected by a filter.
+  WARNING: Device for PV Zdx4cj-zQMQ-oJmL-gePD-Nq0c-XSiZ-9EiwiZ not found or rejected by a filter.
+  WARNING: Device for PV IcKF91-oFAC-pFqq-F5mH-8fWk-FBjf-dmu5zI not found or rejected by a filter.
+  PV /dev/xvdb        VG vg1               lvm2 [100.00 GiB / 0    free]
+  PV /dev/xvdg        VG artifactoryRepo   lvm2 [500.00 GiB / 0    free]
+  PV /dev/xvdh        VG artifactoryRepo   lvm2 [100.00 GiB / 0    free]
+  PV /dev/xvdi        VG artifactoryRepo   lvm2 [250.00 GiB / 0    free]
+  PV /dev/xvdf        VG artifaactoryVG1   lvm2 [250.00 GiB / 0    free]
+  PV unknown device   VG artifaactoryVG1   lvm2 [250.00 GiB / 250.00 GiB free]
+  PV unknown device   VG artifaactoryVG1   lvm2 [250.00 GiB / 250.00 GiB free]
+  PV unknown device   VG artifaactoryVG1   lvm2 [250.00 GiB / 250.00 GiB free]
+  Total: 8 [1.90 TiB] / in use: 8 [1.90 TiB] / in no VG: 0 [0   ]
+[root@ip-172-31-7-205 ~]# pvscan -v
+    Wiping cache of LVM-capable devices
+    Wiping internal VG cache
+  WARNING: Device for PV 1CBCdb-fbtR-9tSJ-Ietx-9e0N-FhXQ-4yox86 not found or rejected by a filter.
+  WARNING: Device for PV Zdx4cj-zQMQ-oJmL-gePD-Nq0c-XSiZ-9EiwiZ not found or rejected by a filter.
+  WARNING: Device for PV IcKF91-oFAC-pFqq-F5mH-8fWk-FBjf-dmu5zI not found or rejected by a filter.
+    There are 3 physical volumes missing.
+    Walking through all physical volumes
+    Found same device /dev/xvdb with same pvid Geo0aFNkd6fW1lglySo82s94DOtN4ucO
+    Found same device /dev/xvdg with same pvid RgeSQHbHjAJIWdn91ZxrgRc53OwvSxzv
+    Found same device /dev/xvdh with same pvid DMeT0UAv81ktN0ygrqshWi5rR1j8mBh3
+    Found same device /dev/xvdi with same pvid 2liOVdIOP1HDKzQf1UEn5EQi7OjOhN6b
+    Found same device /dev/xvdf with same pvid dneCT6iiOMwULvxBGpZjtzwvmvY7r1kS
+  WARNING: Device for PV 1CBCdb-fbtR-9tSJ-Ietx-9e0N-FhXQ-4yox86 not found or rejected by a filter.
+  WARNING: Device for PV Zdx4cj-zQMQ-oJmL-gePD-Nq0c-XSiZ-9EiwiZ not found or rejected by a filter.
+  WARNING: Device for PV IcKF91-oFAC-pFqq-F5mH-8fWk-FBjf-dmu5zI not found or rejected by a filter.
+    There are 3 physical volumes missing.
+    Found same device /dev/xvdi with same pvid 2liOVdIOP1HDKzQf1UEn5EQi7OjOhN6b
+    Found same device /dev/xvdh with same pvid DMeT0UAv81ktN0ygrqshWi5rR1j8mBh3
+    Found same device /dev/xvdf with same pvid dneCT6iiOMwULvxBGpZjtzwvmvY7r1kS
+    Found same device /dev/xvdg with same pvid RgeSQHbHjAJIWdn91ZxrgRc53OwvSxzv
+    Found same device /dev/xvdb with same pvid Geo0aFNkd6fW1lglySo82s94DOtN4ucO
+  PV /dev/xvdb        VG vg1               lvm2 [100.00 GiB / 0    free]
+  PV /dev/xvdg        VG artifactoryRepo   lvm2 [500.00 GiB / 0    free]
+  PV /dev/xvdh        VG artifactoryRepo   lvm2 [100.00 GiB / 0    free]
+  PV /dev/xvdi        VG artifactoryRepo   lvm2 [250.00 GiB / 0    free]
+  PV /dev/xvdf        VG artifaactoryVG1   lvm2 [250.00 GiB / 0    free]
+  PV unknown device   VG artifaactoryVG1   lvm2 [250.00 GiB / 250.00 GiB free]
+  PV unknown device   VG artifaactoryVG1   lvm2 [250.00 GiB / 250.00 GiB free]
+  PV unknown device   VG artifaactoryVG1   lvm2 [250.00 GiB / 250.00 GiB free]
+  Total: 8 [1.90 TiB] / in use: 8 [1.90 TiB] / in no VG: 0 [0   ]
+
+[root@ip-172-31-7-205 ~]# vgchange -an artifactoryRepo
+  0 logical volume(s) in volume group "artifactoryRepo" now active
+  
+[root@ip-172-31-7-205 ~]# vgexport artifactoryRepo
+  Volume group "artifactoryRepo" successfully exported
+  
+[root@ip-172-31-7-205 ~]# pvscan
+  WARNING: Device for PV 1CBCdb-fbtR-9tSJ-Ietx-9e0N-FhXQ-4yox86 not found or rejected by a filter.
+  WARNING: Device for PV Zdx4cj-zQMQ-oJmL-gePD-Nq0c-XSiZ-9EiwiZ not found or rejected by a filter.
+  WARNING: Device for PV IcKF91-oFAC-pFqq-F5mH-8fWk-FBjf-dmu5zI not found or rejected by a filter.
+  WARNING: Device for PV 1CBCdb-fbtR-9tSJ-Ietx-9e0N-FhXQ-4yox86 not found or rejected by a filter.
+  WARNING: Device for PV Zdx4cj-zQMQ-oJmL-gePD-Nq0c-XSiZ-9EiwiZ not found or rejected by a filter.
+  WARNING: Device for PV IcKF91-oFAC-pFqq-F5mH-8fWk-FBjf-dmu5zI not found or rejected by a filter.
+  PV /dev/xvdb        VG vg1               lvm2 [100.00 GiB / 0    free]
+  PV /dev/xvdg         is in exported VG artifactoryRepo [500.00 GiB / 0    free]
+  PV /dev/xvdh         is in exported VG artifactoryRepo [100.00 GiB / 0    free]
+  PV /dev/xvdi         is in exported VG artifactoryRepo [250.00 GiB / 0    free]
+  PV /dev/xvdf        VG artifaactoryVG1   lvm2 [250.00 GiB / 0    free]
+  PV unknown device   VG artifaactoryVG1   lvm2 [250.00 GiB / 250.00 GiB free]
+  PV unknown device   VG artifaactoryVG1   lvm2 [250.00 GiB / 250.00 GiB free]
+  PV unknown device   VG artifaactoryVG1   lvm2 [250.00 GiB / 250.00 GiB free]
+  Total: 8 [1.90 TiB] / in use: 8 [1.90 TiB] / in no VG: 0 [0   ]
+
+[root@ip-172-31-7-205 ~]# vgimport artifactoryRepo
+  Volume group "artifactoryRepo" successfully imported
+
+[root@ip-172-31-7-205 ~]# vgchange -ay artifactoryRepo
+  1 logical volume(s) in volume group "artifactoryRepo" now active
+
+[root@ip-172-31-7-205 ~]# lsblk
+NAME                  MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+xvda                  202:0    0   10G  0 disk 
+├─xvda1               202:1    0    1M  0 part 
+└─xvda2               202:2    0   10G  0 part /
+xvdb                  202:16   0  100G  0 disk 
+├─vg1-docker_meta     253:0    0    5G  0 lvm  
+└─vg1-docker_data     253:1    0   95G  0 lvm  
+xvdf                  202:80   0  250G  0 disk 
+xvdg                  202:96   0  500G  0 disk 
+└─artifactoryRepo-lv1 253:2    0  850G  0 lvm  
+xvdh                  202:112  0  100G  0 disk 
+└─artifactoryRepo-lv1 253:2    0  850G  0 lvm  
+xvdi                  202:128  0  250G  0 disk 
+└─artifactoryRepo-lv1 253:2    0  850G  0 lvm  
+[root@ip-172-31-7-205 ~]# mount /dev/artifactoryRepo/lv1 /var/lib/artifactory/
+[root@ip-172-31-7-205 ~]# ll /var/lib/artifactory/
+total 20
+drwxr-xr-x. 12 root root  4096 Sep 24 15:50 artifactory-powerpack-3.9.2
+drwx------.  2 root root 16384 Oct  1 03:20 lost+found
+
+[root@ip-172-31-7-205 /]# echo "mount /dev/artifactoryRepo/lv1 /var/lib/artifactory/ ext4 defaults 0 0" >> /etc/fstab
+[root@ip-172-31-7-205 /]# cat /etc/fstab 
+
+#
+# /etc/fstab
+# Created by anaconda on Mon Nov  9 20:20:10 2015
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+UUID=379de64d-ea11-4f5b-ae6a-0aa50ff7b24d /                       xfs     defaults        0 0
+mount /dev/artifactoryRepo/lv1 /var/lib/artifactory/ ext4 defaults 0 0
