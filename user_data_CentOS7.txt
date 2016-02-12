@@ -36,7 +36,7 @@ Host *
 EOF
 
 cat << EOF > /home/devops/.ssh/authorized_keys
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDEeBtmgk0tDIsBBsOQTuXWKs4Ra0jwTlOnyYv7LZFH95gA8QPeXyCMsCYN+rYg9EIEHYL8ppfo2cRmMA74TbqYrtKgrzZcFxbRbuDMGoazjFPZva5YXoRr+JJQ5FUhfvSi91qDaNc+Ou5fFihUFM/DxiWsihVkecJ2UGD3gB2jnrjfZ7ot4zLfptQUn/NZUkE0bSR1PTXOWGNsGZ1coN7CknJbRfbiZKA+Xl97gKpFuwLpJx74qi6mk+e4+Tp89Mys1H8SpPiIQZjWQ6hmgaa564pFZf/ICzIUqz5UzAKG4uZcl5megxFSmPIC5iTZCPoAjdFi+ohMabd4Fom6UDwB tekcomms-devops
+_your_pub_key_
 EOF
 
 chown -R devops.devops /home/devops/.ssh
@@ -49,15 +49,38 @@ echo "%devops ALL=(ALL) NOPASSWD: LOG_INPUT: ALL"  > /etc/sudoers.d/scm-devops
 hostnamectl set-hostname artifactory.va
 systemctl restart systemd-hostnamed
 
-#yum -y install git
+# ########### --ANSIBLE INSTALL-- ###########
 
-#Disable SELinux
-#sed -i 's/enforcing/disabled/g' /etc/selinux/config /etc/selinux/config
-#or
-#sed -i s/SELINUX=enforcing/SELINUX=disabled/g /etc/selinux/config
+# ########### GIT INSTALL ###########
+yum -y install git
 
+# ########### ANSIBLE INSTALL ###########
+yum install -y epel-release
+yum -y install ansible
 
-# ########### DISALBE SELINUX IF ENABLED ###########
-#[ "$(getenforce)" == "Enforcing" ] && sed -i s/SELINUX=enforcing/SELINUX=disabled/g /etc/selinux/config
+# ########### SELINUX LIBS INSTALL ###########
+[ "$(getenforce)" == "Enforcing" ] && yum install -y libselinux-python
 
+# ########### ANSIBLE-PULL HOST SETTING ###########
+file="/etc/ansible/hosts"
+[[ -f "$file" ]] && rm -f "$file"
+ 
+cat << EOF > "$file"
+localhost ansible_connection=local
+EOF
 
+chmod 644 /etc/ansible/hosts
+
+# ########### ANSIBLE-PULL CRON SETTING ###########
+dir="/etc/ansible/scarecrow"
+[[ -d "$dir" ]] && rm -rf "$dir"
+mkdir "$dir"
+file="/etc/cron.d/ansible-pull"
+[[ -f "$file" ]] && rm -f "$file"
+
+cat << EOF > "$file" 
+# Cron job to git clone/pull a repo and then run locally
+*/15 * * * * root ansible-pull -o -d /etc/ansible/scarecrow -U http://your-git-server/scm/~sgee/scarecrow.git >> /var/log/ansible-pull.log 2>&1
+EOF
+
+chmod 644 /etc/cron.d/ansible-pull
