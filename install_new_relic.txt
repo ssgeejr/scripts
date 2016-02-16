@@ -1,0 +1,64 @@
+Starting Point for All Distributions
+https://docs.newrelic.com/docs/servers/new-relic-servers-linux/installation-configuration
+
+*******************************************************************************
+******************* REDHAT/CENTOS INSTALLATION INSTRUCTIONS *******************
+*******************************************************************************
+https://docs.newrelic.com/docs/servers/new-relic-servers-linux/installation-configuration/servers-installation-redhat-centos
+
+** YUM INSTALLATION **
+rpm -Uvh https://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-repo-5-3.noarch.rpm
+
+yum install newrelic-sysmond -y
+
+# ****************** END ******************
+
+** RPM INSTALLATION **
+RPM LIST: https://yum.newrelic.com/pub/newrelic/el5/x86_64/
+
+Lastest (7/24/2015): newrelic-sysmond-2.1.0.124-1.x86_64.rpm
+
+Download: 
+cd /tmp
+wget https://yum.newrelic.com/pub/newrelic/el5/x86_64/newrelic-sysmond-2.1.0.124-1.x86_64.rpm
+rpm -i newrelic-sysmond-2.1.0.124-1.x86_64.rpm
+rm -rf newrelic-sysmond-2.1.0.124-1.x86_64.rpm
+
+
+*******************************************************************************
+******************* DEBIAN/UBUNTU INSTALLATION INSTRUCTIONS *******************
+*******************************************************************************
+https://docs.newrelic.com/docs/servers/new-relic-servers-linux/installation-configuration/servers-installation-ubuntu-debian
+
+** APT-GET INSTALLATION **
+echo 'deb http://apt.newrelic.com/debian/ newrelic non-free' | sudo tee /etc/apt/sources.list.d/newrelic.list
+wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
+
+apt-get update
+apt-get install -y newrelic-sysmond
+
+# ****************** END ******************
+** DPKG INSTALLATION **
+https://download.newrelic.com/debian/dists/newrelic/non-free/binary-amd64/
+
+Lastest (7/24/2015): newrelic-sysmond_2.1.0.124_amd64.deb
+
+Download: 
+cd /tmp
+wget https://download.newrelic.com/debian/dists/newrelic/non-free/binary-amd64/newrelic-sysmond_2.1.0.124_amd64.deb
+dpkg -i newrelic-sysmond_2.1.0.124_amd64.deb
+rm -rf newrelic-sysmond_2.1.0.124_amd64.deb
+
+
+*******************************************************************************
+***************************** NEW-RELIC COMMANDS ******************************
+*******************************************************************************
+nrsysmond-config --set license_key=YOUR_LICENSE_KEY
+
+/etc/init.d/newrelic-sysmond start
+
+[redhat]
+chkconfig on newrelic-sysmond
+
+[debian]
+???
