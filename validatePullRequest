@@ -1,0 +1,41 @@
+#!/bin/bash
+
+PR_TO_BRANCH=$1
+PR_FROM_BRANCH=$2
+if [ "$PR_FROM_BRANCH" = "" ]; then
+	echo "Error: From branch not defined"
+	exit 1
+fi
+
+LEN=$(echo ${#PR_FROM_BRANCH})
+if [ $LEN -gt 5 ]; then
+    echo "$PR_FROM_BRANCH has 5 or more characters"
+	FROM_BRANCH=${PR_FROM_BRANCH:0:5}
+else
+    echo "$PR_FROM_BRANCH doesn't have at least 5 characters"
+	exit 1
+fi
+
+if [ "${PR_TO_BRANCH^^}" = "INTEGRATION" ]; then
+	echo "Executing 'Component Level' test"
+	echo "found 'INTEGRATION' branch, validating the source branch is 'FEAT-'"
+	if [ "${FROM_BRANCH^^}" = "FEAT-" ]; then
+		echo "'FEAT-' source branch verified"
+	else
+		echo "Invalid source branch, expected 'FEAT-' found ${FROM_BRANCH^^}"
+		exit 1
+	fi
+	
+elif  [ "${PR_TO_BRANCH^^}" = "MASTER" ]; then
+	echo "Executing 'Ecosystem Level' test"
+	echo "found 'MASTER' branch, validating the source branch is 'INTEGRATION'"
+	if [ "${PR_FROM_BRANCH^^}" = "INTEGRATION" ]; then
+		echo "'INTEGRATION' source branch verified"
+	else
+		echo "Invalid source branch, expected 'INTEGRATION' found ${PR_FROM_BRANCH^^}"
+		exit 1
+	fi
+else	
+	echo "ERROR Invalid Branch"
+	exit 1
+fi
