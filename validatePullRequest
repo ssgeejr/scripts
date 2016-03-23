@@ -21,6 +21,7 @@ if [ "${PR_TO_BRANCH^^}" = "INTEGRATION" ]; then
 	echo "found 'INTEGRATION' branch, validating the source branch is 'FEAT-'"
 	if [ "${FROM_BRANCH^^}" = "FEAT-" ]; then
 		echo "'FEAT-' source branch verified"
+		cmd="SOME__COMMAND__YOU__WANT__TO__RUN"
 	else
 		echo "Invalid source branch, expected 'FEAT-' found ${FROM_BRANCH^^}"
 		exit 1
@@ -39,3 +40,10 @@ else
 	echo "ERROR Invalid Branch"
 	exit 1
 fi
+
+eval $cmnd
+ret_code=$?
+if [ $ret_code != 0 ]; then
+  printf "Error: [%d] when executing command: '$cmnd'" $ret_code
+fi
+exit $ret_code
