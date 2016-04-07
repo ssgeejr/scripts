@@ -1,4 +1,14 @@
 <!--
+# Install required binaries and modules
+apt-get install -y apache2
+
+a2enmod proxy
+a2enmod headers
+a2enmod rewrite
+-->
+
+
+<!--
 file: artifactory.conf
 openssl genrsa -out ca.key 2048 
 openssl req -new -key ca.key -out ca.csr
