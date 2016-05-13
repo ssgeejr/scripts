@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import urllib2, argparse, json
 defaultRegistryPort="80"
-
+ 
 ## Parse command line options
 parser = argparse.ArgumentParser()
 parser.add_argument("registry", help="Docker Registry host")
