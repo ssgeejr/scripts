@@ -1,0 +1,5 @@
+dpkg-reconfigure tzdata
+apt-get install ntpdate
+ntpdate ntp.rich.tek.com 
+hwclock --systohc
+apt-get install ntp
