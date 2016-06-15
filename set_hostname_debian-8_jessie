@@ -1,0 +1,22 @@
+[1]	Change hostname with a commnad (but if rebooting, it will be back).
+# show current hostname
+root@debian:~# hostname 
+debian
+# change hostname
+root@debian:~# hostname bingbong 
+root@debian:~# hostname 
+bingbong# just changed
+
+[2]	Change hostname permanently.
+root@debian:~# hostnamectl set-hostname bingbong
+# show settings
+root@debian:~# hostnamectl 
+    Static hostname: bingbong
+         Icon name: computer-vm
+           Chassis: vm
+        Machine ID: 2e90e59786ba4a289f2422a8ba6d2462
+           Boot ID: 6c03f7df299c4dbeb416c1cf8fe9f869
+    Virtualization: vmware
+  Operating System: Debian GNU/Linux 8 (jessie)
+            Kernel: Linux 3.16.0-4-amd64
+      Architecture: x86-64
