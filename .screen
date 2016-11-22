@@ -1,0 +1,3 @@
+# treat screen connections as if they were login's
+# example: this would execute .bash_profile if /bin/bash is your default shel
+shell -$SHELL
