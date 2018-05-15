@@ -46,6 +46,8 @@ chown -R devops.devops /home/devops/.ssh
 chmod 600 /home/devops/.ssh/*
 chmod 700 /home/devops/.ssh
 
+usermod -aG docker devops
+
 echo "%devops ALL=(ALL) NOPASSWD: LOG_INPUT: ALL"  > /etc/sudoers.d/scm-devops
 
 # Stopping here ... this should have everything configured and ready to go for remote administration
