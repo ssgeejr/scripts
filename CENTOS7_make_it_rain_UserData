@@ -26,7 +26,8 @@ mv apache-maven-3.5.3 maven-3.5.3
 update-alternatives --install /usr/bin/mvn maven /opt/maven-3.5.3/bin/mvn 1
 echo "JAVA_HOME=/opt/jdk1.8.0_171" >> /etc/profile
 echo "M2_HOME=/opt/maven-3.5.3" >> /etc/profile
-echo "export JAVA_HOME M2_HOME" >> /etc/
+echo "export JAVA_HOME M2_HOME" >> /etc/profile
+
 . /etc/profile
 
 adduser devops
