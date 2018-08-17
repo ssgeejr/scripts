@@ -1,0 +1,5 @@
+firewall-cmd --get-active-zones
+firewall-cmd --zone=public --add-port=2888/tcp --permanent
+firewall-cmd --reload
+#or alternate zone
+firewall-cmd --zone=dmz --add-port=2888/tcp --permanent
