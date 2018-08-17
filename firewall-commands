@@ -1,5 +1,31 @@
+systemctl enable firewalld
+
+systemctl restart firewalld
+
+firewall-cmd --list-ports
+
+firewall-cmd --list-services
+
+firewall-cmd --get-default-zone
+
+firewall-cmd --help
+
+Usage: firewall-cmd [OPTIONS...]
+
+General Options
+  -h, --help           Prints a short help text and exists
+  -V, --version        Print the version string of firewalld
+  -q, --quiet          Do not print status messages
+
+Status Options
+  --state                  Return and print firewalld state
+  --reload                 Reload firewall and keep state information
+  --complete-reload        Reload firewall and lose state information
+  --runtime-to-permanent   Create permanent from runtime configuration
+
+# ############## -- commands to enable HTTP (80) -- ##############
 firewall-cmd --get-active-zones
-firewall-cmd --zone=public --add-port=2888/tcp --permanent
+firewall-cmd --zone=public --add-port=80/tcp --permanent
 firewall-cmd --reload
 #or alternate zone
-firewall-cmd --zone=dmz --add-port=2888/tcp --permanent
+firewall-cmd --zone=dmz --add-port=80/tcp --permanent
