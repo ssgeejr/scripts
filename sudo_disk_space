@@ -1,0 +1,17 @@
+it's easy to run a small VM out of disk space, when this happens, it's a true pain in the ass to assume root to clear up space. 
+even sudo'ing to root fails ... to prevent this, create these two scripts and put them somewhere in your path
+
+create-temp-space
+```
+#!/bin/bash
+
+truncate -s 50M /tmp/recovery_space
+```
+
+recover-space-sudo
+```
+#!/bin/bash
+
+rm -rf /tmp/recovery_space && sudo su -
+```
+

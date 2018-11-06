@@ -1,0 +1,54 @@
+#create volume groups
+vgcreate prometheus /dev/sdh /dev/sdi /dev/sdj
+vgcreate logging /dev/sdk /dev/sdl /dev/sdm
+vgcreate alert /dev/sdn /dev/sdo
+
+#create logical volumes
+lvcreate --name lv0 --size 30G prometheus
+lvcreate --name lv1 --size 30G prometheus
+lvcreate --name lv2 -l 100%FREE prometheus
+lvcreate --name lv0 --size 30G logging
+lvcreate --name lv1 --size 30G logging
+lvcreate --name lv2 -l 100%FREE logging
+lvcreate --name managerlv --size 9G alert
+lvcreate --name bufferlv -l 100%FREE alert
+
+#format slabs
+mkfs.ext4 /dev/prometheus/lv0
+mkfs.ext4 /dev/prometheus/lv1
+mkfs.ext4 /dev/prometheus/lv2
+mkfs.ext4 /dev/logging/lv0
+mkfs.ext4 /dev/logging/lv1
+mkfs.ext4 /dev/logging/lv2
+mkfs.ext4 /dev/alert/managerlv
+mkfs.ext4 /dev/alert/bufferlv
+
+#create target directories
+mkdir -p /var/tmp/PV/prometheus-0
+mkdir /var/tmp/PV/prometheus-1
+mkdir /var/tmp/PV/prometheus-2
+mkdir /var/tmp/PV/logging-0
+mkdir /var/tmp/PV/logging-1
+mkdir /var/tmp/PV/logging-2
+mkdir /var/tmp/PV/alertmanager
+mkdir /var/tmp/PV/alertbuffer
+
+#mount
+mount /dev/prometheus/lv0 /var/tmp/PV/prometheus-0
+mount /dev/prometheus/lv1 /var/tmp/PV/prometheus-1
+mount /dev/prometheus/lv2 /var/tmp/PV/prometheus-2
+mount /dev/logging/lv0 /var/tmp/PV/logging-0
+mount /dev/logging/lv1 /var/tmp/PV/logging-1
+mount /dev/logging/lv2 /var/tmp/PV/logging-2
+mount /dev/alert/managerlv /var/tmp/PV/alertmanager
+mount /dev/alert/bufferlv /var/tmp/PV/alertbuffer
+
+#add to /etc/fstab
+/dev/prometheus/lv0 /var/tmp/PV/prometheus-0 ext4 defaults 0 0
+/dev/prometheus/lv1 /var/tmp/PV/prometheus-1 ext4 defaults 0 0
+/dev/prometheus/lv2 /var/tmp/PV/prometheus-2 ext4 defaults 0 0
+/dev/logging/lv0 /var/tmp/PV/logging-0 ext4 defaults 0 0
+/dev/logging/lv1 /var/tmp/PV/logging-1 ext4 defaults 0 0
+/dev/logging/lv2 /var/tmp/PV/logging-2 ext4 defaults 0 0
+/dev/alert/managerlv /var/tmp/PV/alertmanager ext4 defaults 0 0
+/dev/alert/bufferlv /var/tmp/PV/alertbuffer ext4 defaults 0 0
