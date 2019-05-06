@@ -1,0 +1,20 @@
+#!/bin/bash
+
+
+if [ "$#" -lt 2 ]; then
+    echo "Illegal number of parameters"
+    exit -1
+fi
+wd=`pwd`
+
+#$echo "Using docker-compose file: $1"
+dcfile=$1
+shift
+
+#echo "You provided the arguments:" "$@"
+
+cd /opt/compose
+#docker-compose -f $cdfile.yml $@
+echo "docker-compose -f $dcfile.yml $@"
+
+cd $wd
