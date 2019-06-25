@@ -27,3 +27,10 @@ for line in output_lines:
                 for lineB in output_linesB:
                         if lineB:
                                 print ('bcommand: ' + lineB)
+								
+								
+								
+								
+								
+								
+								

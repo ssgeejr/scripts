@@ -1,0 +1,265 @@
+
+
+
+C:\...\orchestrationpoc
+C:\...\projects\config\install_openshift.txt
+C:\...\orchestrationpoc\cicd_notes.txt
+
+
+[root@avid-cfv231 ~]# ip addr show | wc -l
+342
+
+
+[root@avid-cfv231 ~]# docker ps | wc -l
+159
+
+[root@avid-cfv231 ~]# docker network ls
+NETWORK ID          NAME                DRIVER              SCOPE
+7f25be007414        bridge              bridge              local
+337557f2805f        host                host                local
+67e84c1f29d8        none                null                local
+
+[root@avid-cfv231 ~]# docker ps -a | grep Exited | wc -l
+86
+
+
+134, 137, 2, 0
+
+(continer) ad62a73bc3cd (image) registry.access.redhat.com/openshift3/logging-kibana
+Exited (137)
+KIBANA_
+
+
+..........................................
+
+import subprocess
+
+
+p = subprocess.Popen(['docker', 'ps', '-a'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+out, err = p.communicate()
+print out
+
+..........................................
+/////////////////////////////////////////////////////////////////////////////////////
+process = subprocess.Popen("top -n 1", stdout=subprocess.PIPE, shell=True)
+output = process.stdout.read()
+output_lines = output.split(b'\n')
+/////////////////////////////////////////////////////////////////////////////////////
+process = subprocess.Popen("docker ps -aq -f status=exited", stdout=subprocess.PIPE, shell=True)
+output = process.stdout.read()
+output_lines = output.split(b'\n') 
+for line in output_lines:
+	print(line)
+/////////////////////////////////////////////////////////////////////////////////////
+
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+
+***************************************
+# MongoPy
+import pymongo
+
+myclient = pymongo.MongoClient("mongodb://localhost:27017/")
+mydb = myclient["mydatabase"]
+mycol = mydb["customers"]
+
+mydict = { "name": "John", "address": "Highway 37" }
+
+x = mycol.insert_one(mydict)
+
+#printout the ID
+print(x.inserted_id)
+
+***************************************
+
+docker ps -a | grep Exited | grep 137 | awk '{ print $1 }' | docker images
+docker inspect 756e189f0cec --format='{{.State.ExitCode}}'
+
+xargs -I {} docker rm {}
+
+docker inspect 756e189f0cec --format='{{.State.ExitCode}}'
+sha256:ca9e2fccef98191f864f50ee803929ccfb72cec0f371b1d369d6a611e03ca122
+
+echo sha256:ca9e2fccef98191f864f50ee803929ccfb72cec0f371b1d369d6a611e03ca122 | awk '{print substr($7) }'
+
+awk '{print substr($1,8) }'
+
+
+
+"State": {
+            "Status": "exited",
+            "Running": false,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 0,
+            "ExitCode": 130,
+
+
+docker ps --filter status=exited --filter status=created
+
+--get json for ALL containers ... 
+docker inspect --format='{{json .}}' $(docker ps -aq)
+
+
+
+		
+docker inspect 756e189f0cec --format='{{json .}}'
+... or ...
+                                    ='{{json .Config}}'
+                                    ='{{json .Image}}'
+                                    ='{{json .NetworkSettings}}'
+
+docker inspect 756e189f0cec --format='{{.Config.Image}}'
+
+docker inspect 756e189f0cec --format='{{.Image}}'
+
+docker images | grep 756e189f0cec
+
+
+"Image"
+
+import subprocess
+from time import sleep
+
+
+p = subprocess.Popen(['docker', 'ps', '-a'],
+					 stdout=subprocess.PIPE,
+					 stderr=subprocess.PIPE,
+					 shell=True)
+# Read stdout from subprocess until the buffer is empty !
+for line in iter(p.stdout.readline, b''):
+	if line: # Don't print blank lines
+		yield line
+# This ensures the process has completed, AND sets the 'returncode' attr
+while p.poll() is None:                                                                                                                                        
+	sleep(.1) #Don't waste CPU-cycles
+# Empty STDERR buffer
+err = p.stderr.read()
+if p.returncode != 0:
+   # The run_command() function is responsible for logging STDERR 
+   print("Error: " + str(err))
+
+
+	   
+	   
+	   import subprocess
+from time import sleep
+
+
+	   
+..........................................................
+command=['docker', 'ps', '-a']
+def run_command(command):
+    p = subprocess.Popen(command,
+                         stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE,
+                         shell=True)
+    # Read stdout from subprocess until the buffer is empty !
+    for line in iter(p.stdout.readline, b''):
+        if line: # Don't print blank lines
+            yield line
+    # This ensures the process has completed, AND sets the 'returncode' attr
+    while p.poll() is None:                                                                                                                                        
+        sleep(.1) #Don't waste CPU-cycles
+    # Empty STDERR buffer
+    err = p.stderr.read()
+    if p.returncode != 0:
+       # The run_command() function is responsible for logging STDERR 
+       print("Error: " + str(err))
+
+	   
+..........................................................
+
+# Bitbucket Docker Implementation
+
+https://hub.docker.com/r/atlassian/bitbucket-server:5.13.0/
+
+docker volume create --name bitbucketVolume
+
+
+docker run -v bitbucketVolume:/var/atlassian/application-data/bitbucket --name="bitbucket" -d -p 7990:7990 -p 7999:7999 atlassian/bitbucket-server:5.13.0
+
+
+
+
+docker run -u root -v /data/bitbucket:/var/atlassian/application-data/bitbucket atlassian/bitbucket-server:5.13.0 chown -R daemon  /var/atlassian/application-data/bitbucket
+
+
+
+
+Start Atlassian Bitbucket Server:
+docker run -v /data/bitbucket:/var/atlassian/application-data/bitbucket --name="bitbucket" -d -p 7990:7990 -p 7999:7999 atlassian/bitbucket-server:5.13.0
+
+
+
+Bitbucket
+
+version: '3.4'
+services:
+    bitbucket:
+	    image: 
+		name: bitbucket
+    sprintbucket:
+        image: atlassian/bitbucket-server:5.13.0
+        container_name: bitbucket
+        networks:
+                cicd_net:
+                        ipv4_address: 10.10.10.110
+                        aliases:
+                                - bitbucket
+
+        ports:
+            - "7990:7990"
+            - "7999:7999"
+        volumes:
+            - $CICD_HOME/bitbucket/data/var/atlassian/application-data/bitbucket
+        tty: true
+        stdin_open: true
+        restart: always
+
+
+
+
+https://blog.appdynamics.com/product/kubernetes-monitoring-with-appdynamics/
+AppDynamics for Kubernetes
+
+
+https://blog.takipi.com/docker-monitoring-5-methods-for-monitoring-java-applications-in-docker/
+
+
+
+
+
+Portal
+https://www.appdynamics.com/community/exchange/
+
+Docker Monitoring
+https://www.appdynamics.com/community/exchange/extension/docker-monitoring-extension
+
+Elasticsearch
+https://www.appdynamics.com/community/exchange/extension/elasticsearch-monitoring-extension/
+
+Logstash
+https://www.appdynamics.com/community/exchange/extension/logstash-alerting-extension/
+
+Couchbase
+https://www.appdynamics.com/community/exchange/extension/couchbase-monitoring-extension/
+
+Weblogic (I know this is a touchy subject, the plugin still exist)
+https://www.appdynamics.com/community/exchange/extension/weblogic-monitoring-extension
+
+Code examples of proprietary implementations
+https://github.com/Appdynamics/neo4j-monitoring-extension
+
+
+
+
+
+
+
+
+
+
