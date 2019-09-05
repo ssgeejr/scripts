@@ -39,6 +39,7 @@ systemctl enable docker
 
 yum install -y java-1.8.0-openjdk-devel
 
+cd /opt
 wget http://apache.osuosl.org/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
 tar -zxvf apache-maven-3.6.1-bin.tar.gz
 rm -f apache-maven-3.6.1-bin.tar.gz
