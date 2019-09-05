@@ -39,14 +39,14 @@ systemctl enable docker
 
 yum install -y java-1.8.0-openjdk-devel
 
-wget http://www-us.apache.org/dist/maven/maven-3/3.5.3/binaries/apache-maven-3.5.3-bin.tar.gz
-tar -zxvf apache-maven-3.5.3-bin.tar.gz
-rm -f apache-maven-3.5.3-bin.tar.gz
-mv apache-maven-3.5.3 maven-3.5.3
-update-alternatives --install /usr/bin/mvn maven /opt/maven-3.5.3/bin/mvn 1
+wget http://apache.osuosl.org/maven/maven-3/3.6.1/binaries/apache-maven-3.6.1-bin.tar.gz
+tar -zxvf apache-maven-3.6.1-bin.tar.gz
+rm -f apache-maven-3.6.1-bin.tar.gz
+mv apache-maven-3.6.1 maven-3.6.1
+update-alternatives --install /usr/bin/mvn maven /opt/maven-3.6.1/bin/mvn 1
 
 #echo "JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.222.b10-0.el7_6.x86_64/" >> /etc/profile
-echo "M2_HOME=/opt/maven-3.5.3" >> /etc/profile
+echo "M2_HOME=/opt/maven-3.6.1" >> /etc/profile
 #echo "export JAVA_HOME M2_HOME" >> /etc/profile
 echo "export M2_HOME" >> /etc/profile
 
