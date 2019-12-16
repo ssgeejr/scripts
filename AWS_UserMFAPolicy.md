@@ -120,3 +120,5 @@ You begin by creating an IAM customer managed policy that denies all permissions
     ]
 }
 ```
+
+Referenced from: https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_users-self-manage-mfa-and-creds.html
