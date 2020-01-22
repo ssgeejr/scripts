@@ -6,9 +6,13 @@ adduser devops
 cd /home/devops
 mkdir .ssh
 
+#for connecting to a VPC using a CIDR of /16 ... use this example
 cat << EOF > /home/devops/.ssh/config
 Host *
     StrictHostKeyChecking no
+Host 10.10.*
+     IdentityFile ~/.ssh/yourPrivateKey
+     User yourUserName
 EOF
 
 cat << EOF >> /home/devops/.ssh/authorized_keys
