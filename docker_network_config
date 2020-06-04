@@ -1,0 +1,31 @@
+
+# OPTIOMN 1
+"/etc/sysconfig/network-scripts/eth0"
+172.31.0.0/16 via 10.115.254.1 dev eth0
+systemctl restart network
+
+
+
+
+#OPTION 2
+
+https://support.zenoss.com/hc/en-us/articles/203582809-How-to-Change-the-Default-Docker-Subnet
+
+systemctl stop serviced
+systemctl stop docker
+iptables -t nat -F POSTROUTING
+ip link set dev docker0 down
+ip addr del 172.17.42.1/16 dev docker0
+ip addr add 192.168.5.1/24 dev docker0
+ip link set dev docker0 up
+ip addr show docker0
+systemctl start docker 
+iptables -t nat -L -n
+sytemctl start serviced
+
+
+By default when docker allocates a subnet for a new container it chooses a subnet from the range 172.[17-31].0.0/16 and 192.168.[0-240].0/20. In your case however, when it eventually chooses subnet 172.31.0.0/16 
+
+
+
+
