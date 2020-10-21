@@ -1,0 +1,55 @@
+## USER DATA 
+#!/bin/bash
+
+adduser --disabled-password --gecos "" devops
+cd /home/devops
+mkdir .ssh
+#for connecting to a VPC using a CIDR of /16 ... use this example
+cat << EOF > /home/devops/.ssh/config
+Host *
+    StrictHostKeyChecking no
+EOF
+cat << EOF >> /home/devops/.ssh/authorized_keys
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDF84T3h7eUDlZU33hYJQqGt+0YATBGZvyU4D6nPJxFNcEyVBwaHDyr+9ofw3NV9V5ORYZc/Qa56OY93pqqsyGmMrZHHcAgqtPF+FqqzJ+ya2tv6k1uaXtHvnzec8x6Sw+Rj+Soq/Z264q8PCshIf3CIoUA5y5nqVvnDLLrjATbnZiCOOdFJCC73LzINuDbMN46BPVbdEtblmntMNloy7LdhxV8pj9gpNLVZOutnttbyk4uTIntt1KMrpAozxFiyGLQTUw3w/1U9zYx9wCS8sfyvhs1uUo5oaWShfp361Q+LJwXMAySvVpqskbYpLzy9FD17I7LiZaaJWsUL7v2bZx1 awsaemdevops
+EOF
+
+#when needed
+#ssh-keygen -q -t rsa -b 2048 -N '' -f ~/.ssh/myprivatekey <<<y 2>&1 >/dev/null
+
+chown -R devops.devops /home/devops/.ssh
+chmod 600 /home/devops/.ssh/*
+chmod 700 /home/devops/.ssh
+echo "%devops ALL=(ALL) NOPASSWD: LOG_INPUT: ALL"  > /etc/sudoers.d/devops
+
+apt-get update
+apt-get install -y lvm2 wget curl git tmux python3-pip python3-dev build-essential tree
+wget https://raw.githubusercontent.com/ssgeejr/config/master/.tmux.conf -O /etc/tmux.conf
+
+curl -fsSL https://get.docker.com/ | sh
+
+pip3 install -U pip
+pip install -U docker-compose
+
+systemctl start docker
+systemctl enable docker
+usermod -aG docker devops
+
+sysctl -w vm.max_map_count=262144
+sysctl -w fs.file-max=65536
+ulimit -n 65536
+ulimit -u 4096
+
+# ##################################
+#pvcreate /dev/${VOLUME_ID} 
+#vgcreate datagrp /dev/${VOLUME_ID}
+#lvcreate --name lvol -l 100%FREE datagrp
+#mkfs.ext4 /dev/datagrp/lvol
+#mkdir /opt/apps
+#mount /dev/datagrp/lvol /opt/apps
+
+#chgrp -R devops /opt
+#chown -R devops:devops /opt/apps
+#chmod -R 775 /opt
+```
+
+#ssh-keygen -q -t rsa -b 2048 -N '' -f ~/.ssh/sonarqube <<<y 2>&1 >/dev/null
