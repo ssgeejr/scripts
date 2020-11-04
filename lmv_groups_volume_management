@@ -1,16 +1,24 @@
-#Remove the group/volume you plan on replacing
+#Variables:
+# old logical group: xxloggroup
+# new logical group: aaloggroup
+# old logical volume: xxlogvol
+# new logical volume: aalogvol
+
+
+Use Case: You have a server with an existing logical group and logical volume and are attaching a replacing a drive with a different logical gorup and volume name. 
+This will walk you through renaming those and remounting them
+
+#Remove the group/volume you plan on replacing (these are the from a new server that we want to use the same group and volume names)
 umount /opt/apps
-vgchange -a n datagrp
-vgremove datagrp
+vgchange -a n aalogvol
+vgremove aaloggroup
 
 #remove drive
 
 #attach new drive with wrong parititon names
 #rename your drives
-lvrename yourlogicalgroup oldlvname newlvname
-vgrename yourlogicalgroup newlogicalgroupname
+lvrename aaloggroup xxlogvol aalogvol
+vgrename aaloggroup aaloggroup
 
 #mount 
-mount /dev/newlogicalgroupname/newlvname /opt/apps
-
-Samples: https://www.golinuxhub.com/2014/03/how-to-rename-logical-volume-and-volume/
+mount /dev/aaloggroup/aalogvol /opt/apps
