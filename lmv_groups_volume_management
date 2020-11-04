@@ -1,0 +1,16 @@
+#Remove the group/volume you plan on replacing
+umount /opt/apps
+vgchange -a n datagrp
+vgremove datagrp
+
+#remove drive
+
+#attach new drive with wrong parititon names
+#rename your drives
+lvrename yourlogicalgroup oldlvname newlvname
+vgrename yourlogicalgroup newlogicalgroupname
+
+#mount 
+mount /dev/newlogicalgroupname/newlvname /opt/apps
+
+Samples: https://www.golinuxhub.com/2014/03/how-to-rename-logical-volume-and-volume/
