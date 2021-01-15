@@ -1,0 +1,6 @@
+
+Disable debian host file management:
+
+/etc/cloud/cloud.cfg.d/01_debian_cloud.cfg
+
+manage_etc_hosts: false 
