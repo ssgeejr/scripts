@@ -1,3 +1,23 @@
+##Two different systmes
+#-----NEW TARGET-----#
+nvme0n1        259:0    0   20G  0 disk
+└─datagrp-lvol 254:0    0   20G  0 lvm  /opt/apps
+
+#-----EXISTING-----# 
+nvme0n1               259:0    0   20G  0 disk
+└─sonarqubevg-datalv1 254:0    0   20G  0 lvm  /opt/sonarqube
+
+vgrename -v sonarqubevg datagrp
+
+
+#-----Rename Logical Group-----#
+vgrename -v sonarqubevg datagrp
+
+#-----Rename Logical Volume-----#
+lvrename /dev/datagrp/datalv1 /dev/datagrp/lvol
+
+# -----------------------------------------------
+
 #Variables:
 # old logical group: xxloggroup
 # new logical group: aaloggroup
