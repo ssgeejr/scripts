@@ -16,6 +16,8 @@ vgrename -v sonarqubevg datagrp
 #-----Rename Logical Volume-----#
 lvrename /dev/datagrp/datalv1 /dev/datagrp/lvol
 
+*** Don't forget to update your /etc/fstab ***
+
 # -----------------------------------------------
 
 #Variables:
