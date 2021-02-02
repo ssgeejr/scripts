@@ -1,3 +1,8 @@
+Rename Groups Volumes
+vgrename /dev/vg02 /dev/my_volume_group
+lvrename /dev/vg02/lvold /dev/vg02/lvnew
+
+
 apt-get install lvm2<br />
 /etc/init.d/lvm start<br />
 *not needed, utility for graphically configuring Logical Volumes*<br />
