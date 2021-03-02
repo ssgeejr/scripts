@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+    client:
+        image: europaclient
+        container_name: europaclient
+        ports:
+            - 80:8080
+        depends_on:
+            - db
+        build:
+            context: client/docker
+            dockerfile: Dockerfile
+            args:
+                version: 1.3
+            labels:
+                - "webappowner=ssgeejr"
+    db:
+        image: mysql:5.6
+        container_name: europadb
+        environment:
+            MYSQL_DATABASE: 'europa'
+            MYSQL_USER: 'europa'
+            MYSQL_PASSWORD: 'silverlining'
+            MYSQL_ROOT_PASSWORD: 'threeblindmice'
+        volumes:
+            - ./mysql:/docker-entrypoint-initdb.d/:ro
+            - /opt/apps/europadb:/var/lib/mysql
