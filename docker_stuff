@@ -1,0 +1,4 @@
+To create a global gitignore file, create your file in your home direcctory ~/.gitignore and execute the following command:
+
+git config --global core.excludesfile ~/.gitignore
+
