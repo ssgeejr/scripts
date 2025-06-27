@@ -36,6 +36,9 @@ Select-String "Key Content" |
 ForEach-Object { ($_ -split ":")[1].Trim() }
 ```
 
+Here’s a **PowerShell script** that retrieves the **Wi-Fi passwords for all saved networks** on a Windows system:
+
+```powershell
 # Get all Wi-Fi profile names
 $profiles = netsh wlan show profiles | Select-String "All User Profile" | ForEach-Object {
     ($_ -split ":")[1].Trim()
@@ -54,3 +57,22 @@ foreach ($profile in $profiles) {
 
     Write-Output "SSID: $profile | Password: $password"
 }
+```
+
+---
+
+### What it does:
+
+* Gets all saved Wi-Fi profile names
+* Queries each profile for its stored password
+* Prints the SSID and password to the screen
+
+---
+
+### Output Example:
+
+```
+SSID: HomeNetwork | Password: mySuperSecretPass
+SSID: OfficeWiFi  | Password: Company123!
+SSID: Guest       | Password: [No Password Found or Not Stored]
+```
