@@ -1,0 +1,51 @@
+git config --global core.excludesfile "~/.gitignore_global"
+
+
+
+
+```
+# IDE and editor folders
+.idea/
+.vscode/
+
+# Python artifacts
+__pycache__/
+*.pyc
+
+# OS clutter
+.DS_Store
+Thumbs.db
+
+# Archives and compressed files
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+
+# Executables and binaries
+*.exe
+*.dll
+*.so
+*.out
+*.app
+
+# Java build artifacts
+*.jar
+*.war
+*.ear
+
+# Excel and spreadsheet files
+*.xls
+*.xlsx
+*.xlsm
+*.xlsb
+*.ods
+*.csv
+
+# Logs and temp
+*.log
+*.tmp
+*.swp
+```
