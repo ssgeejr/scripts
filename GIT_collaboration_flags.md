@@ -35,7 +35,7 @@ These don't trigger pre-commit hooks or TODO scanners, but are **searchable, con
 You might also include initials, timestamps, or ticket references:
 
 ```python
-# NEXT(steveng, 2025-07-12): Add AWS IAM validation logic
+# NEXT(ioexcept, 2025-07-12): Add AWS IAM validation logic
 ```
 
 Or tie into GitHub/Jira:
