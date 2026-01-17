@@ -1,0 +1,3 @@
+sudo update-alternatives --config editor
+sudo visudo -f /etc/sudoers.d/devops
+aiadmin ALL=(ALL) NOPASSWD: ALL
